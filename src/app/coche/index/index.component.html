@@ -11,7 +11,7 @@
             <h4 class="card-title">{{ coche.modelo }}</h4>
             <p class="card-text">{{ coche.motor }}</p>
   
-            <a href="#" [routerLink]="['/coche/', coche.id, 'view']" class="btn btn-danger">Entrar</a>
+            <!--a href="#" [routerLink]="['/coche/', coche.id, 'view']" class="btn btn-danger">Entrar</a>
             <a href="#" [routerLink]="['/coche/', coche.id, 'edit']" class="btn btn-danger">Edit</a-->
             <button type="button" class="btn btn-danger" (click)="onOpenModal(coche,'edit')">Edit 2</button>
             <button type="button" (click)="deleteCoche(coche.id)" class="btn btn-danger">Delete</button>
@@ -20,25 +20,23 @@
       </div>
     </div>
     
-    <div class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="AutorEditModalLabel" aria-hidden="true" *ngIf="nuevoCoche" id = "updateAutorModal">
+    <div class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="AutorEditModalLabel" aria-hidden="true" *ngIf="newCoche" id = "updateAutorModal">
       <h1>Update Coche</h1>
       <a href="#" routerLink="/coche/index" class="btn btn-primary">Back</a>
 
-      <form id="form">
+      <form [formGroup]="form">
       
-        <div class="form-group" [formGroup]="form">
+        <div class="form-group">
           <label for="modelo">Modelo:</label>
-          <input formControlName="modelo" id="modelo" type="text" class="form-control"/>
+          <input formControlName="modelo" id="modelo" type="text" [(ngModel)]="newCoche.modelo" class="form-control"/>
           <div *ngIf="f['modelo'].touched && f['modelo'].invalid" class="alert alert-danger">
-            <div *ngIf="f['modelo'].errors && f['modelo'].errors['required']">
-              Modelo obligatorio
-            </div>
+            <div *ngIf="f['modelo'].errors && f['modelo'].errors['required']">Modelo obligatorio</div>
           </div>
         </div>
 
-        <div class="form-group" [formGroup]="form">
+        <div class="form-group">
           <label for="motor">Motor:</label>
-          <textarea formControlName="motor" id="motor" type="text"  class="form-control"></textarea>
+          <textarea formControlName="motor" id="motor" type="text" [(ngModel)]="newCoche.motor" class="form-control"></textarea>
           <div *ngIf="f['motor'].touched && f['motor'].invalid" class="alert alert-danger">
             <div *ngIf="f['motor'].errors && f['motor'].errors['required']">
               Motor obligatorio
@@ -46,9 +44,9 @@
           </div>
         </div>
 
-          <div class="form-group" [formGroup]="form">
+          <div class="form-group">
             <label for="ano">Año:</label>
-            <textarea formControlName="ano" id="ano" type="number"  class="form-control"></textarea>
+            <textarea formControlName="ano" id="ano" type="number" [(ngModel)]="newCoche.ano" class="form-control"></textarea>
             <div *ngIf="f['ano'].touched && f['ano'].invalid" class="alert alert-danger" >
               <div *ngIf="f['ano'].errors && f['ano'].errors['required']" >
                 Año obligatorio
@@ -56,7 +54,7 @@
             </div>
         </div>
 
-        <button class="btn btn-primary" type="submit" [disabled]="!form.valid" (click)="updateCoche(nuevoCoche)">
+        <button class="btn btn-primary" type="submit" [disabled]="!form.valid" (click)="updateCoche(newCoche)">
           Update
         </button>
       </form>

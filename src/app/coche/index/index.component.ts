@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Form, FormGroup } from "@angular/forms";
+import { Form, FormBuilder, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Coche } from "../coche";
 import { CocheService } from "../coche.service";
@@ -16,7 +16,9 @@ export class IndexComponent implements OnInit{
   private router!: Router
   form!: FormGroup;
   
-  constructor(public cocheService: CocheService){}
+  constructor(public cocheService: CocheService, private formBuilder:FormBuilder){
+    this.form=this.formBuilder.group({})
+  }
 
   ngOnInit(): void {
     this.cocheService.getAll().subscribe((data: Coche[])=>{
@@ -33,8 +35,25 @@ export class IndexComponent implements OnInit{
 
   deleteCoche(id:number){
     this.cocheService.delete(id).subscribe(res => {
-      
+      this.coches = this.coches.filter(item => item.id !== id);
+      console.log("Eliminado ok");
+      this.router.navigateByUrl('coche/index');
     })
   }
+
+  public updateCoche(coche:Coche): void{
+    console.log('coche', coche);
+    this.cocheService.update(coche).subscribe(
+      (response: Coche)=>{
+        this.cocheService.getAll
+      }
+    )
+  }
+
+  get f(){
+    return this.form.controls;
+  }
+
+  onSubmit(){}
 
 }
