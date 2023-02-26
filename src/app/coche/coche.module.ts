@@ -6,7 +6,8 @@ import { IndexComponent } from './index/index.component';
 import { ViewComponent } from './view/view.component';
 import { EditComponent } from './edit/edit.component';
 import { ListComponent } from './list/list.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { CocheService } from './coche.service';
 
 
 @NgModule({
@@ -24,6 +25,8 @@ import { RouterModule } from '@angular/router';
     ]),
     ReactiveFormsModule,
     FormsModule
-  ]
+    ],
+    exports:[
+    ]
 })
 export class CocheModule { }

@@ -14,7 +14,8 @@
             <td>{{coche.modelo}}</td>
             <td>{{coche.motor}}</td>
             <td>{{coche.ano}}</td>
-            <button class="btn btn-primary" (click)="updateCoche(coche)">Editar</button>
+            <button type="button" class="btn btn-success" (click)="verCoche(coche)">Ver</button>
+            <button class="btn btn-primary" (click)="updateCoche(coche.id)">Editar</button>
             <button class="btn btn-danger" (click)="deleteCoche(coche.id)">Eliminar</button>
         </tr>
     </tbody>

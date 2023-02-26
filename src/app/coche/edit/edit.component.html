@@ -1,8 +1,18 @@
 <div class="container" >
     <h1>Modificar Coche</h1>
-    <a href="#" routerLink="/coche/index" class="btn btn-primary">Back</a>
+    <a href="#" routerLink="/coche/list" class="btn btn-primary">Back</a>
 
     <form [formGroup]="form">
+
+      <div class="form-group">
+        <label for="id">Id:</label>
+        <input formControlName="id" id="id" type="text" [(ngModel)]="nuevoCoche.id" class="form-control"/>
+        <div *ngIf="f['id'].touched && f['id'].invalid" class="alert alert-danger">
+          <div *ngIf="f['id'].errors && f['id'].errors['required']">
+            Modelo obligatorio
+          </div>
+        </div>
+      </div>
     
         <div class="form-group">
         <label for="modelo">Modelo:</label>

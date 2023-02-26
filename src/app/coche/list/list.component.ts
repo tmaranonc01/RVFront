@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Coche } from '../coche';
 import { CocheService } from '../coche.service';
 
@@ -9,9 +10,8 @@ import { CocheService } from '../coche.service';
 })
 export class ListComponent implements OnInit{
   coches: Coche[] = [];
-  router: any;
 
-  constructor(private cocheService: CocheService){}
+  constructor(private cocheService: CocheService, private router: Router){}
 
   ngOnInit(): void {
     this.cocheService.getAll().subscribe(
@@ -28,13 +28,15 @@ export class ListComponent implements OnInit{
     })
   }
 
-  updateCoche(coche:Coche): void{
-    console.log('coche', coche);
-    this.cocheService.update(coche).subscribe(
-      (response: Coche)=>{
-        this.cocheService.getAll
-      }
-    )
+  updateCoche(id:number): void{
+    console.log('coche', id);
+    this.router.navigateByUrl('coche/edit/:id')
   }
-  
+
+  verCoche(coche: Coche): void{
+    console.log('coche', coche);
+    this.router.navigateByUrl('coche/view')
+  }
+
+
 }

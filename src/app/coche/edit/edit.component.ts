@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Coche } from '../coche';
 import { CocheService } from '../coche.service';
@@ -13,17 +13,28 @@ export class EditComponent implements OnInit{
   id!:number;
   nuevoCoche!: Coche
   form!: FormGroup;
+  cocheId!: Coche
 
-  constructor(private cocheService: CocheService, private route: ActivatedRoute, private router: Router){  }
+  constructor(private cocheService: CocheService, private route: ActivatedRoute, private router: Router){ 
+    this.id =+this.route.snapshot.paramMap.get('id');
+    this.cocheService.find(this.id).subscribe(coche => this.nuevoCoche = coche);
+   }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['cocheId'];
     this.cocheService.find(this.id).subscribe((data: Coche)=>{
       this.nuevoCoche = data;
     });
+
+    this.form = new FormGroup({
+      id: new FormControl(this.id),
+      modelo: new FormControl('', Validators.required),
+      motor: new FormControl('', Validators.required),
+      ano: new FormControl('', Validators.required)
+    });
   }
   
-  public updateCoche(coche: Coche):void{
+  updateCoche(coche: Coche):void{
     console.log('coche', coche);
     this.cocheService.update(coche).subscribe(
       (response: Coche)=>{
