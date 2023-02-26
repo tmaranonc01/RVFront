@@ -9,6 +9,7 @@ import { CocheService } from '../coche.service';
 })
 export class ListComponent implements OnInit{
   coches: Coche[] = [];
+  router: any;
 
   constructor(private cocheService: CocheService){}
 
@@ -19,4 +20,21 @@ export class ListComponent implements OnInit{
     );
   }
 
+  deleteCoche(id:number){
+    this.cocheService.delete(id).subscribe(res => {
+      this.coches = this.coches.filter(item => item.id !== id);
+      console.log("Eliminado ok");
+      this.router.navigateByUrl('coche/list');
+    })
+  }
+
+  updateCoche(coche:Coche): void{
+    console.log('coche', coche);
+    this.cocheService.update(coche).subscribe(
+      (response: Coche)=>{
+        this.cocheService.getAll
+      }
+    )
+  }
+  
 }

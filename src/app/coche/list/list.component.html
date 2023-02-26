@@ -1,5 +1,5 @@
 <h2>Lista coches</h2>
-<table>
+<table class="table">
     <thead>
         <tr>
             <th>ID</th>
@@ -14,6 +14,8 @@
             <td>{{coche.modelo}}</td>
             <td>{{coche.motor}}</td>
             <td>{{coche.ano}}</td>
+            <button class="btn btn-primary" (click)="updateCoche(coche)">Editar</button>
+            <button class="btn btn-danger" (click)="deleteCoche(coche.id)">Eliminar</button>
         </tr>
     </tbody>
 </table>

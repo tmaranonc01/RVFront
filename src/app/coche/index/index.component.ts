@@ -41,7 +41,7 @@ export class IndexComponent implements OnInit{
     })
   }
 
-  public updateCoche(coche:Coche): void{
+  updateCoche(coche:Coche): void{
     console.log('coche', coche);
     this.cocheService.update(coche).subscribe(
       (response: Coche)=>{
