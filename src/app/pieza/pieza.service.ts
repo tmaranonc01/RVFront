@@ -1,17 +1,15 @@
-import { Injectable } from '@angular/core';
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { Coche } from './coche';
+import { Injectable } from '@angular/core';
+import { catchError, Observable, throwError } from 'rxjs';
+import { Pieza } from './pieza';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CocheService {
-
+export class PiezaService {
+  
   private API = "http://localhost:8080";
-
+  
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -19,15 +17,17 @@ export class CocheService {
     })
   }
   constructor(private httpClient: HttpClient){}
-
-
+  
   getAll(): Observable<any> {
-    return this.httpClient.get<Coche[]>(this.API + '/coche');
+    return this.httpClient.get(this.API + '/pieza')
+    .pipe(
+      catchError(this.errorHandler)
+    )
   }
 
 
-  create(coche:Coche): Observable<any>{
-    return this.httpClient.post(this.API + '/coche', JSON.stringify(coche), this.httpOptions)
+  create(pieza:Pieza): Observable<any>{
+    return this.httpClient.post(this.API + '/pieza', JSON.stringify(pieza), this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
     )
@@ -35,16 +35,16 @@ export class CocheService {
 
 
   find(id:number): Observable<any>{
-    return this.httpClient.get(this.API + '/coche/'+ id)
+    return this.httpClient.get(this.API + '/pieza/'+ id)
     .pipe(
       catchError(this.errorHandler)
     )
   }
 
 
-  update(coche:Coche): Observable<any>{
-    return this.httpClient.put(this.API + '/coche' + coche.id, JSON.stringify(coche), this.httpOptions)
-    //return this.httpClient.put(this.API + '/coche' + id,coche, this.httpOptions)
+  update(pieza:Pieza): Observable<any>{
+    return this.httpClient.put(this.API + '/pieza' + pieza.id, JSON.stringify(pieza), this.httpOptions)
+    //return this.httpClient.put(this.API + '/pieza' + id,pieza, this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
     )
@@ -52,12 +52,19 @@ export class CocheService {
 
 
   delete(id:number): Observable<any>{
-    return this.httpClient.delete(this.API + '/coche/' + id, this.httpOptions)
+    return this.httpClient.delete(this.API + '/pieza/' + id, this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
     )
   }
 
+
+  getAllCoches():Observable<any> {
+    return this.httpClient.get(this.API + '/coche')
+    .pipe(
+      catchError(this.errorHandler)
+    )
+  }
 
 
   errorHandler(error:any) {
@@ -71,3 +78,4 @@ export class CocheService {
  }
 
 }
+

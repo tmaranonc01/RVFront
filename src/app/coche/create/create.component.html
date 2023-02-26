@@ -1,8 +1,9 @@
 <div class="container">
     <h1>Crear un nuevo coche</h1>
+    
     <a href="#" routerLink="/coche/index" class="btn btn-primary">Back</a>
 
-    <form [formGroup]="form" (ngSubmit)="submit()">
+    <form  (ngSubmit)="submit()">[formGroup]="form"
       
         <div class="form-group">
           <label for="modelo">Modelo:</label>

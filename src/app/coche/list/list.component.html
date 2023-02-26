@@ -1,0 +1,19 @@
+<h2>Lista coches</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Modelo</th>
+            <th>Motor</th>
+            <th>Año</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let coche of coches">
+            <td>{{coche.id}}</td>
+            <td>{{coche.modelo}}</td>
+            <td>{{coche.motor}}</td>
+            <td>{{coche.ano}}</td>
+        </tr>
+    </tbody>
+</table>

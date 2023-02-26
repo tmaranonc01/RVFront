@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule,  } from '@angular/forms';
 import { IndexComponent } from './index/index.component';
 import { ViewComponent } from './view/view.component';
 import { EditComponent } from './edit/edit.component';
+import { ListComponent } from './list/list.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -12,10 +14,14 @@ import { EditComponent } from './edit/edit.component';
     IndexComponent,
     CreateComponent,
     ViewComponent,
-    EditComponent
+    EditComponent,
+    ListComponent
   ],
   imports: [
     CommonModule,
+    RouterModule.forChild([
+      {path: 'coche', component: ListComponent}
+    ]),
     ReactiveFormsModule,
     FormsModule
   ]
