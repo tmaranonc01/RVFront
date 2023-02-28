@@ -3,47 +3,27 @@
     <a href="#" routerLink="/coche/list" class="btn btn-primary">Back</a>
 
     <form [formGroup]="form" (ngSubmit)="submit()">
+    
+      <div class="form-group">
+        <label for="id">ID:</label>
+        <input formControlName="id" id="id" type="number" [(ngModel)]="nuevoCoche.id" class="form-control"/>
+      </div>
 
       <div class="form-group">
-        <label for="id">Id:</label>
-        <input formControlName="id" id="id" type="text" [(ngModel)]="nuevoCoche.id" name="id" class="form-control"/>
-        <div *ngIf="f['id'].touched && f['id'].invalid" class="alert alert-danger">
-          <div *ngIf="f['id'].errors && f['id'].errors['required']">
-            Modelo obligatorio
-          </div>
-        </div>
-      </div>
-    
-        <div class="form-group">
         <label for="modelo">Modelo:</label>
         <input formControlName="modelo" id="modelo" type="text" [(ngModel)]="nuevoCoche.modelo" class="form-control"/>
-        <div *ngIf="f['modelo'].touched && f['modelo'].invalid" class="alert alert-danger">
-          <div *ngIf="f['modelo'].errors && f['modelo'].errors['required']">
-            Modelo obligatorio
-          </div>
-        </div>
       </div>
 
       <div class="form-group">
         <label for="motor">Motor:</label>
         <textarea formControlName="motor" id="motor" type="text" [(ngModel)]="nuevoCoche.motor" class="form-control"></textarea>
-        <div *ngIf="f['motor'].touched && f['motor'].invalid" class="alert alert-danger">
-          <div *ngIf="f['motor'].errors && f['motor'].errors['required']" >
-            Motor obligatorio
-          </div>
-        </div>
       </div>
 
         <div class="form-group">
           <label for="ano">Año:</label>
-          <textarea formControlName="ano" id="ano" type="text" [(ngModel)]="nuevoCoche.ano" class="form-control"></textarea>
-          <div *ngIf="f['ano'].touched && f['ano'].invalid" class="alert alert-danger" >
-            <div *ngIf="f['ano'].errors && f['ano'].errors['required']">
-              Año obligatorio
-            </div>
-          </div>
+          <textarea formControlName="ano" id="ano" type="number" [(ngModel)]="nuevoCoche.ano" class="form-control"></textarea>
       </div>
   
-      <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Update</button>
+      <button class="btn btn-primary" type="submit">Update</button>
     </form>
   </div>

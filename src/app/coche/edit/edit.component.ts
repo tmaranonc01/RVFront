@@ -13,32 +13,27 @@ export class EditComponent implements OnInit{
   id!:number;
   nuevoCoche!: Coche;
   form!: FormGroup;
-  cocheId!: Coche
 
   constructor(private cocheService: CocheService, private route: ActivatedRoute, private router: Router){ 
-   // this.id =+this.route.snapshot.paramMap.get('id');
-    //this.cocheService.find(this.id).subscribe(coche => this.nuevoCoche = coche);
    }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    
     this.cocheService.find(this.id).subscribe((data: Coche)=>{
       this.nuevoCoche = data;
     });
-
-    this.form = new FormGroup({
+     this.form = new FormGroup({
       modelo: new FormControl('', Validators.required),
       motor: new FormControl('', Validators.required),
       ano: new FormControl('', Validators.required)
-    });
+    }); 
   }
   
   updateCoche(coche: Coche):void{
     console.log('coche', coche);
     this.cocheService.update(this.id, this.form.value).subscribe(
       (response: Coche)=>{
-        this.router.navigateByUrl('coche/index')
+        this.router.navigateByUrl('coche/list')
       }
     )
   }
