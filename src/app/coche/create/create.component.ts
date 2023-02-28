@@ -31,7 +31,7 @@ export class CreateComponent implements OnInit {
     console.log(this.form.value);
     this.cocheService.create(this.form.value).subscribe((res:any)=> {
       console.log('Coche creado');
-      this.router.navigateByUrl('coche/index');
+      this.router.navigateByUrl('coche/list');
     })
   }
 }

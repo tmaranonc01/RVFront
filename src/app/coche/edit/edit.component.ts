@@ -11,23 +11,23 @@ import { CocheService } from '../coche.service';
 })
 export class EditComponent implements OnInit{
   id!:number;
-  nuevoCoche!: Coche
+  nuevoCoche!: Coche;
   form!: FormGroup;
   cocheId!: Coche
 
   constructor(private cocheService: CocheService, private route: ActivatedRoute, private router: Router){ 
-    this.id =+this.route.snapshot.paramMap.get('id');
-    this.cocheService.find(this.id).subscribe(coche => this.nuevoCoche = coche);
+   // this.id =+this.route.snapshot.paramMap.get('id');
+    //this.cocheService.find(this.id).subscribe(coche => this.nuevoCoche = coche);
    }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['cocheId'];
+    this.id = this.route.snapshot.params['id'];
+    
     this.cocheService.find(this.id).subscribe((data: Coche)=>{
       this.nuevoCoche = data;
     });
 
     this.form = new FormGroup({
-      id: new FormControl(this.id),
       modelo: new FormControl('', Validators.required),
       motor: new FormControl('', Validators.required),
       ano: new FormControl('', Validators.required)
@@ -36,10 +36,17 @@ export class EditComponent implements OnInit{
   
   updateCoche(coche: Coche):void{
     console.log('coche', coche);
-    this.cocheService.update(coche).subscribe(
+    this.cocheService.update(this.id, this.form.value).subscribe(
       (response: Coche)=>{
         this.router.navigateByUrl('coche/index')
       }
+    )
+  }
+
+  obtenerCoche(id:number){
+    this.cocheService.find(id).subscribe((data)=> {
+      this.nuevoCoche = data;
+    }
     )
   }
   
@@ -61,6 +68,14 @@ export class EditComponent implements OnInit{
 
     container!.appendChild(button);
     button.click();
+  }
+
+  submit(){
+    console.log(this.form.value);
+    this.cocheService.update(this.id, this.form.value).subscribe((res:any)=>{
+      console.log("Actualizado");
+      this.router.navigateByUrl('coche/list');
+    })
   }
 }
 

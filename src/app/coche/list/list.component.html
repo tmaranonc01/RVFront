@@ -1,22 +1,27 @@
-<h2>Lista coches</h2>
-<table class="table">
-    <thead>
+<div class="container">
+    <h1>Lista coches</h1>
+    <a href="#" routerLink="/coche/create" class="btn btn-success">Crear coche</a>
+
+    <table class="table table-bordered">
         <tr>
             <th>ID</th>
             <th>Modelo</th>
             <th>Motor</th>
             <th>Año</th>
+            <th>Acciones</th>
         </tr>
-    </thead>
-    <tbody>
         <tr *ngFor="let coche of coches">
             <td>{{coche.id}}</td>
             <td>{{coche.modelo}}</td>
             <td>{{coche.motor}}</td>
             <td>{{coche.ano}}</td>
-            <button type="button" class="btn btn-success" (click)="verCoche(coche)">Ver</button>
-            <button class="btn btn-primary" (click)="updateCoche(coche.id)">Editar</button>
-            <button class="btn btn-danger" (click)="deleteCoche(coche.id)">Eliminar</button>
+            <td>
+                <a href="#" [routerLink]="['/coche/', coche.id, 'view']" class="btn btn-info">View</a>
+                <a href="#" [routerLink]="['/coche/', coche.id, 'edit']" class="btn btn-primary">Edit</a>
+                <button type="button" (click)="deleteCoche(coche.id)" class="btn btn-danger">Delete</button>
+            </td>
         </tr>
-    </tbody>
-</table>
+    </table>
+
+
+</div>

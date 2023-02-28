@@ -9,9 +9,6 @@ import { Coche } from './coche';
   providedIn: 'root'
 })
 export class CocheService {
-  getCoche(id: number) {
-    throw new Error('Method not implemented.');
-  }
 
   private API = "http://localhost:8080";
 
@@ -22,7 +19,6 @@ export class CocheService {
     })
   }
   constructor(private httpClient: HttpClient){}
-
 
   getAll(): Observable<any> {
     return this.httpClient.get<Coche[]>(this.API + '/coche');
@@ -45,8 +41,8 @@ export class CocheService {
   }
 
 
-  update(coche:Coche): Observable<any>{
-    return this.httpClient.put(this.API + '/coche/' + coche.id, JSON.stringify(coche), this.httpOptions)
+  update(id:number, coche:Coche): Observable<any>{
+    return this.httpClient.put(this.API + '/coche/' + id, JSON.stringify(coche), this.httpOptions)
     //return this.httpClient.put(this.API + '/coche' + id,coche, this.httpOptions)
     .pipe(
       catchError(this.errorHandler)

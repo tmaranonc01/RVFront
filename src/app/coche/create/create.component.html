@@ -1,39 +1,34 @@
 <div class="container">
-    <h1>Crear un nuevo coche</h1>
-    
-    <a href="#" routerLink="/coche/index" class="btn btn-primary">Back</a>
+  <h1>Crear un nuevo coche</h1>
+  <a href="#" routerLink="/coche/list" class="btn btn-primary">Back</a>
 
-    <form  (ngSubmit)="submit()">[formGroup]="form"
-      
-        <div class="form-group">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <div class="form-group">
           <label for="modelo">Modelo:</label>
           <input formControlName="modelo" id="modelo" type="text" class="form-control">
           <div *ngIf="f['modelo'].touched && f['modelo'].invalid" class="alert alert-danger">
-            <div *ngIf="f['modelo'].errors && f['modelo'].errors['required']">Modelo obligatorio</div>
+              <div *ngIf="f['modelo'].errors && f['modelo'].errors['required']">Modelo obligatorio</div>
           </div>
-        </div>
+      </div>
 
-        <div class="form-group">
+      <div class="form-group">
           <label for="motor">Motor:</label>
-          <input formControlName="modelo" id="modelo" type="text" class="form-control">
+          <input formControlName="motor" id="motor" type="text" class="form-control">
           <div *ngIf="f['motor'].touched && f['motor'].invalid" class="alert alert-danger">
-            <div *ngIf="f['motor'].errors && f['motor'].errors['required']">
-              Motor obligatorio
-            </div>
+              <div *ngIf="f['motor'].errors && f['motor'].errors['required']">Motor obligatorio</div>
           </div>
-        </div>
+      </div>
 
-          <div class="form-group">
-            <label for="ano">Año:</label>
-            <input formControlName="modelo" id="modelo" type="text" class="form-control">
-            <div *ngIf="f['ano'].touched && f['ano'].invalid" class="alert alert-danger" >
-              <div *ngIf="f['ano'].errors && f['ano'].errors['required']" >
-                Año obligatorio
-              </div>
-            </div>
-        </div>
+      <div class="form-group">
+          <label for="ano">Año:</label>
+          <input formControlName="ano" id="ano" type="text" class="form-control">
+          <div *ngIf="f['ano'].touched && f['ano'].invalid" class="alert alert-danger">
+              <div *ngIf="f['ano'].errors && f['ano'].errors['required']">Año obligatorio</div>
+          </div>
+      </div>
 
-        <button class="btn btn-primary" (click)="submit()" type="submit">Submit</button>
+      <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Submit</button>
 
-    </form>
+  </form>
 </div>

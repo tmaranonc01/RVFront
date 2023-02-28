@@ -2,11 +2,11 @@
     <h1>Modificar Coche</h1>
     <a href="#" routerLink="/coche/list" class="btn btn-primary">Back</a>
 
-    <form [formGroup]="form">
+    <form [formGroup]="form" (ngSubmit)="submit()">
 
       <div class="form-group">
         <label for="id">Id:</label>
-        <input formControlName="id" id="id" type="text" [(ngModel)]="nuevoCoche.id" class="form-control"/>
+        <input formControlName="id" id="id" type="text" [(ngModel)]="nuevoCoche.id" name="id" class="form-control"/>
         <div *ngIf="f['id'].touched && f['id'].invalid" class="alert alert-danger">
           <div *ngIf="f['id'].errors && f['id'].errors['required']">
             Modelo obligatorio
@@ -44,8 +44,6 @@
           </div>
       </div>
   
-      <button class="btn btn-primary" type="submit" [disabled]="!form.valid" (click)="updateCoche(nuevoCoche)">
-        Update
-      </button>
+      <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Update</button>
     </form>
   </div>
